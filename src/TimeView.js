@@ -6,6 +6,29 @@ var React = require('react'),
 	onClickOutside = require('react-onclickoutside').default
 	;
 
+var defaultTimeConstraints = {
+	hours: {
+		min: 0,
+		max: 23,
+		step: 1
+	},
+	minutes: {
+		min: 0,
+		max: 59,
+		step: 1
+	},
+	seconds: {
+		min: 0,
+		max: 59,
+		step: 1
+	},
+	milliseconds: {
+		min: 0,
+		max: 999,
+		step: 1
+	}
+};
+
 var DateTimePickerTime = onClickOutside( createClass({
 	getInitialState: function() {
 		return this.calculateState( this.props );
@@ -111,31 +134,12 @@ var DateTimePickerTime = onClickOutside( createClass({
 
 	componentWillMount: function() {
 		var me = this;
-		me.timeConstraints = {
-			hours: {
-				min: 0,
-				max: 23,
-				step: 1
-			},
-			minutes: {
-				min: 0,
-				max: 59,
-				step: 1
-			},
-			seconds: {
-				min: 0,
-				max: 59,
-				step: 1
-			},
-			milliseconds: {
-				min: 0,
-				max: 999,
-				step: 1
-			}
-		};
-		['hours', 'minutes', 'seconds', 'milliseconds'].forEach( function( type ) {
-			assign(me.timeConstraints[ type ], me.props.timeConstraints[ type ]);
-		});
+		me.timeConstraints = defaultTimeConstraints;
+		if (me.props.timeConstraints) {
+			['hours', 'minutes', 'seconds', 'milliseconds'].forEach( function( type ) {
+				assign(me.timeConstraints[ type ], me.props.timeConstraints[ type ]);
+			});
+		}
 		this.setState( this.calculateState( this.props ) );
 	},
 
@@ -146,28 +150,7 @@ var DateTimePickerTime = onClickOutside( createClass({
 				assign(me.timeConstraints[ type ], nextProps.timeConstraints[ type ]);
 			});
 		} else {
-			me.timeConstraints = {
-				hours: {
-					min: 0,
-					max: 23,
-					step: 1
-				},
-				minutes: {
-					min: 0,
-					max: 59,
-					step: 1
-				},
-				seconds: {
-					min: 0,
-					max: 59,
-					step: 1
-				},
-				milliseconds: {
-					min: 0,
-					max: 999,
-					step: 1
-				}
-			};
+			me.timeConstraints = defaultTimeConstraints;
 		}
 		this.setState( this.calculateState( nextProps ) );
 	},
