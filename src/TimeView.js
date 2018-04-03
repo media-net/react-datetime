@@ -95,8 +95,8 @@ var DateTimePickerTime = onClickOutside( createClass({
 			counters.push(
 				React.createElement('div', { className: 'rdtCounter rdtMilli', key: 'm' },
 					React.createElement('input', { value: this.state.milliseconds, type: 'text', onChange: this.updateMilli } )
-					)
-				);
+				)
+			);
 		}
 
 		return React.createElement('div', { className: 'rdtTime' },
@@ -140,6 +140,35 @@ var DateTimePickerTime = onClickOutside( createClass({
 	},
 
 	componentWillReceiveProps: function( nextProps ) {
+		var me = this;
+		if (nextProps.timeConstraints) {
+			['hours', 'minutes', 'seconds', 'milliseconds'].forEach( function( type ) {
+				assign(me.timeConstraints[ type ], nextProps.timeConstraints[ type ]);
+			});
+		} else {
+			me.timeConstraints = {
+				hours: {
+					min: 0,
+					max: 23,
+					step: 1
+				},
+				minutes: {
+					min: 0,
+					max: 59,
+					step: 1
+				},
+				seconds: {
+					min: 0,
+					max: 59,
+					step: 1
+				},
+				milliseconds: {
+					min: 0,
+					max: 999,
+					step: 1
+				}
+			};
+		}
 		this.setState( this.calculateState( nextProps ) );
 	},
 
