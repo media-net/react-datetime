@@ -1,34 +1,34 @@
-var DateTime = require('../DateTime.js');
-var React = require('react');
-var ReactDOM = require('react-dom');
-var createClass = require('create-react-class');
-var moment = require('moment');
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import moment from 'moment';
+import DateTime from '../DateTime';
 
-var Wrapper = createClass({
-	getInitialState: function() {
-		return {
-			dateFormat: 'YYYY-MM-DD'
-		};
-	},
+class Wrapper extends Component {
+    state = {
+        dateFormat: 'YYYY-MM-DD'
+    };
 
-	updateFormat: function(format) {
-		console.log('changing state');
-		this.setState({
-			dateFormat: 'DD.MM.YYYY'
-		});
-	},
+    componentDidMount = () => {
+        setTimeout(this.updateFormat, 3000);
+    };
 
-	componentDidMount: function() {
-		setTimeout(this.updateFormat, 2000);
-	},
+    updateFormat = () => {
+        console.log('changing state'); //eslint-disable-line
+        this.setState({
+            dateFormat: 'DD.MM.YYYY'
+        });
+    };
 
-	render: function() {
-		return React.createElement(DateTime,
-			{ dateFormat: this.state.dateFormat, timeFormat: false, defaultValue: moment() });
-	}
-});
+    render() {
+        console.log('Current viewmode: ' + this.state.viewMode); //eslint-disable-line
+        return (
+            <DateTime
+                dateFormat={this.state.dateFormat}
+                timeFormat={false}
+                defaultValue={moment()}
+            />
+        );
+    }
+}
 
-ReactDOM.render(
-	React.createElement(Wrapper),
-	document.getElementById('datetime')
-);
+render(<Wrapper />, document.getElementById('datetime'));

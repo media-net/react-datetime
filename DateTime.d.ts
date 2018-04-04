@@ -4,8 +4,8 @@
 //     Updates by: Aaron Spaulding <aaron@sachimp.com>,
 //                 Karol Janyst <http://github.com/LKay>
 
-import { Component, ChangeEvent, FocusEvent, FocusEventHandler } from "react";
-import { Moment } from "moment";
+import { Component, ChangeEvent, FocusEvent, FocusEventHandler } from 'react';
+import { Moment } from 'moment';
 
 export = ReactDatetimeClass;
 
@@ -13,7 +13,7 @@ declare namespace ReactDatetimeClass {
     /*
      The view mode can be any of the following strings.
      */
-    export type ViewMode = "years" | "months" | "days" | "time";
+    export type ViewMode = 'years' | 'months' | 'days' | 'time';
 
     export interface TimeConstraint {
         min: number;
@@ -77,6 +77,11 @@ declare namespace ReactDatetimeClass {
          */
         utc?: boolean;
         /*
+            to customise arrows on counter
+         */
+        upArrow?: JSX.Element;
+        downArrow?: JSX.Element;
+        /*
          Callback trigger when the date changes. The callback receives the selected `moment` object as
          only parameter, if the date in the input is valid. If the date in the input is not valid, the
          callback receives the value of the input (a string).
@@ -130,21 +135,34 @@ declare namespace ReactDatetimeClass {
          the selectedDate, the current date and the default calculated props for the cell,
          and must return a React component. See appearance customization
          */
-        renderDay?: (props: any, currentDate: any, selectedDate: any) => JSX.Element;
+        renderDay?: (
+            props: any,
+            currentDate: any,
+            selectedDate: any
+        ) => JSX.Element;
         /*
          Customize the way that the months are shown in the month picker.
          The accepted function has the selectedDate, the current date and the default calculated
          props for the cell, the month and the year to be shown, and must return a
          React component. See appearance customization
          */
-        renderMonth?: (props: any, month: number, year: number, selectedDate: any) => JSX.Element;
+        renderMonth?: (
+            props: any,
+            month: number,
+            year: number,
+            selectedDate: any
+        ) => JSX.Element;
         /*
          Customize the way that the years are shown in the year picker.
          The accepted function has the selectedDate, the current date and the default calculated
          props for the cell, the year to be shown, and must return a React component.
          See appearance customization
          */
-        renderYear?: (props: any, year: number, selectedDate: any) => JSX.Element;
+        renderYear?: (
+            props: any,
+            year: number,
+            selectedDate: any
+        ) => JSX.Element;
         /*
          Whether to use moment's strict parsing when parsing input.
          */
@@ -177,4 +195,7 @@ declare namespace ReactDatetimeClass {
     }
 }
 
-declare class ReactDatetimeClass extends Component<ReactDatetimeClass.DatetimepickerProps, ReactDatetimeClass.DatetimepickerState> {}
+declare class ReactDatetimeClass extends Component<
+    ReactDatetimeClass.DatetimepickerProps,
+    ReactDatetimeClass.DatetimepickerState
+> {}

@@ -1,7 +1,29 @@
 {
-  "presets": [
-    "es2015",
-    "react"
-  ],
-  "plugins": ["transform-remove-strict-mode"]
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "browsers": ["last 2 versions"]
+                }
+            }
+        ],
+        "@babel/preset-react",
+        "@babel/preset-stage-1"
+    ],
+    "env": {
+        "development": {
+            "presets": [["@babel/preset-react", { "development": true }]]
+        },
+        "test": {
+            "plugins": ["transform-es2015-modules-commonjs"]
+        },
+        "production": {
+            "plugins": [
+                "lodash",
+                "transform-react-constant-elements",
+                "transform-react-remove-prop-types"
+            ]
+        }
+    }
 }

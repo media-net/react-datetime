@@ -1,42 +1,72 @@
 module.exports = {
-    "env": {
-        "browser": true
+    env: {
+        es6: true,
+        browser: true,
+        node: true,
+        jquery: true,
+        jest: true
     },
-    "globals": {
-        "require": true,
-        "module": true
+    extends: ['eslint:recommended', 'prettier', 'prettier/react'],
+    plugins: ['react', 'import', 'prettier'],
+    parser: 'babel-eslint',
+    parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: {
+            modules: true,
+            jsx: true
+        }
     },
-    // Enables rules that report common problems,
-    // see http://eslint.org/docs/rules/ for list
-    "extends": "eslint:recommended",
-    "rules": {
-        // Enforce the use of variables within the scope they are defined
-        "block-scoped-var": 2,
-        // Enforce camelcase naming convention
-        "camelcase": 2,
-        // Enforce consistent spacing before and after commas
-        "comma-spacing": 2,
-        // Enforce at least one newline at the end of files
-        "eol-last": 2,
-        // Require the use of === and !==
-        "eqeqeq": [2, "smart"],
-        // Enforce consistent spacing before and after keywords
-        "keyword-spacing": [2, { "before": true, "after": true }],
-        // Disallow multiple empty lines
-        "no-multiple-empty-lines": [2, { "max": 1, "maxEOF": 1, "maxBOF": 0 }],
-        // Enforce the consistent use of the radix argument when using parseInt()
-        "radix": 2,
-        // Require or disallow semicolons instead of AS
-        "semi": 2,
-        // Enforce consistent spacing before and after semicolons
-        "semi-spacing": 2,
-        // Enforce consistent spacing before blocks
-        "space-before-blocks": 2,
-        // Enforce consistent spacing inside parentheses
-        // "space-in-parens": [2, "always"],
-        // Enforce the consistent use of either backticks, double, or single quotes
-        "quotes": [2, "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
-        // Enforce using tabs for indentation
-        "indent": [2, "tab", { "SwitchCase": 1 }]
+    rules: {
+        quotes: 0,
+        'no-console': 1,
+        'no-debugger': 1,
+        'no-var': 1,
+        'no-trailing-spaces': 0,
+        'eol-last': 0,
+        'no-underscore-dangle': 0,
+        'no-alert': 0,
+        'no-lone-blocks': 0,
+        'react/display-name': [
+            1,
+            {
+                ignoreTranspilerName: false
+            }
+        ],
+        'react/forbid-prop-types': [
+            1,
+            {
+                forbid: ['any']
+            }
+        ],
+        'react/jsx-boolean-value': 0,
+        'react/jsx-closing-bracket-location': 0,
+        'react/jsx-indent-props': 0,
+        'react/jsx-key': 1,
+        'react/jsx-max-props-per-line': 0,
+        'react/jsx-no-bind': 0,
+        'react/jsx-no-duplicate-props': 1,
+        'react/jsx-no-literals': 0,
+        'react/jsx-no-undef': 1,
+        'react/jsx-pascal-case': 1,
+        'react/jsx-sort-prop-types': 0,
+        'react/jsx-sort-props': 0,
+        'react/jsx-uses-react': 1,
+        'react/jsx-uses-vars': 1,
+        'react/no-danger': 1,
+        'react/no-did-mount-set-state': 1,
+        'react/no-did-update-set-state': 1,
+        'react/no-direct-mutation-state': 1,
+        'react/no-multi-comp': 1,
+        'react/no-set-state': 0,
+        'react/no-unknown-property': 1,
+        'react/prefer-es6-class': 1,
+        'react/prop-types': 0,
+        'react/react-in-jsx-scope': 1,
+        'react/self-closing-comp': 1,
+        'react/sort-comp': 1,
+        'import/extensions': 1,
+        'import/no-named-as-default': 0,
+        'prettier/prettier': ['error', { singleQuote: true, tabWidth: 4 }]
     }
 };

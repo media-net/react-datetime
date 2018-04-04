@@ -1,35 +1,30 @@
-var DateTime = require('../DateTime.js');
-var React = require('react');
-var ReactDOM = require('react-dom');
-var createClass = require('create-react-class');
-var moment = require('moment');
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import moment from 'moment';
+import DateTime from '../DateTime';
 
-var Wrapper = createClass({
-	getInitialState: function() {
-		return {
-			viewMode: 'time'
-		};
-	},
+class Wrapper extends Component {
+    state = {
+        viewmode: 'time'
+    };
 
-	updateView: function(format) {
-		console.log('changing viewMode to days');
-		this.setState({
-			viewMode: 'days'
-		});
-	},
+    componentDidMount = () => {
+        setTimeout(this.updateView, 3000);
+    };
 
-	componentDidMount: function() {
-		setTimeout(this.updateView, 3000);
-	},
+    updateView = () => {
+        console.log('changing viewMode to days'); //eslint-disable-line
+        this.setState({
+            viewMode: 'days'
+        });
+    };
 
-	render: function() {
-		console.log('Current viewmode: ' + this.state.viewMode);
-		return React.createElement(DateTime,
-            { viewMode: this.state.viewMode, defaultValue: moment() });
-	}
-});
+    render() {
+        console.log('Current viewmode: ' + this.state.viewMode); //eslint-disable-line
+        return (
+            <DateTime viewMode={this.state.viewmode} defaultValue={moment()} />
+        );
+    }
+}
 
-ReactDOM.render(
-  React.createElement(Wrapper),
-  document.getElementById('datetime')
-);
+render(<Wrapper />, document.getElementById('datetime'));
